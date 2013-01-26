@@ -114,7 +114,7 @@
             $bot_reply = make_reply($text);
             
             if(ctype_space($bot_reply) || empty($bot_reply) || $bot_reply == ".")
-                $bot_reply = $fail // curl_operation($text, $id);
+                $bot_reply = $fail; // curl_operation($text, $id);
                 
             $reply = "$from $bot_reply";
             
