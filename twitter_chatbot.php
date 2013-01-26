@@ -21,8 +21,8 @@
  *
  *	@author (of minor modifications) Leonard M. Witzel <witzel@post.harvard.edu> 
  */
-	
-	
+
+
 	error_reporting(E_ERROR | E_WARNING | E_PARSE); // Turn on error reporting for debugging.
 
 	$db_host = '';  /* Your db host name here, probably 'localhost' */
