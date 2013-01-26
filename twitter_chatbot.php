@@ -37,7 +37,15 @@
     $access_token_secret = '';
     
     $me   = "";  /* Your Twitter Username without the @ symbol */
-    $fail = "sorry, I wasn't paying attention..."; /* Default response if chatbot fails to find appropriate answer. */
+    
+    /* Default response if chatbot fails to find appropriate answer. */
+    $fail = array(
+        "Sorry, I wasn't paying attention...",
+        "I'm sorry. I'm a bit sleepy. What was that again?",
+        "Can you rephrase that?",
+        "So how about that local sports team?",
+        "When I grow up I want to be a giant robot."
+    );
 
     /**
      * curl_operation function.
@@ -86,11 +94,10 @@
     foreach ($direct_msg as $msg){
         sleep(rand(5,20));  /* Makes the bot a bit more human like */
         $user   = $msg->sender_screen_name;
-        $rtext  = $msg->text;
-        $text   = urlencode($rtext);
+        $text  = $msg->text;
         $msg_id = $msg->id;
         curl_operation($text, $msg_id);
-        $grassbrig_reply   = $oauth->post('direct_messages/new',array('screen_name'=>$user,'text'=>make_reply($rtext)));
+        $grassbrig_reply   = $oauth->post('direct_messages/new',array('screen_name'=>$user,'text'=>make_reply($text)));
         $grassbrig_destory = $oauth->post('direct_messages/destroy/'.$msg_id);
     }
          
@@ -114,7 +121,7 @@
             $bot_reply = make_reply($text);
             
             if(ctype_space($bot_reply) || empty($bot_reply) || $bot_reply == ".")
-                $bot_reply = $fail; // curl_operation($text, $id);
+                $bot_reply = array_random($fail); // curl_operation($text, $id);
                 
             $reply = "$from $bot_reply";
             
