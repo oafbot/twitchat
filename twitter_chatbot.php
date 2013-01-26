@@ -36,7 +36,7 @@
 	$access_token        = '';
 	$access_token_secret = '';
 	
-    $me   = "";  /* Your Twitter Username without the @ symbol */
+	$me   = "";  /* Your Twitter Username without the @ symbol */
 	$fail = "sorry, I wasn't paying attention..."; /* Default response if chatbot fails to find appropriate answer. */
 
 	/**
