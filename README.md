@@ -16,3 +16,8 @@ Let me know if you make any useful modifications to this script.
 Robert of www.rebelworlds.com may also apprecaite the source code to any future modifications.
 
 #### Install instructions:
+=======
+twitchat
+========
+
+A quick hack to link Program-O chatbot to twitter
