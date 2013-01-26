@@ -93,8 +93,8 @@
     
     foreach ($direct_msg as $msg){
         sleep(rand(5,20));  /* Makes the bot a bit more human like */
-        $user   = $msg->sender_screen_name;
-        $text  = $msg->text;
+        $user = $msg->sender_screen_name;
+        $text = $msg->text;
         $msg_id = $msg->id;
         curl_operation($text, $msg_id);
         $grassbrig_reply   = $oauth->post('direct_messages/new',array('screen_name'=>$user,'text'=>make_reply($text)));
@@ -121,7 +121,7 @@
             $bot_reply = make_reply($text);
             
             if(ctype_space($bot_reply) || empty($bot_reply) || $bot_reply == ".")
-                $bot_reply = array_random($fail); // curl_operation($text, $id);
+                $bot_reply = array_rand($fail); // curl_operation($text, $id);
                 
             $reply = "$from $bot_reply";
             
