@@ -106,8 +106,8 @@
         
         if($tweets->from_user != $me){
             $tweet = $tweets->text;
-            /* $text  = $remove_user_text=str_replace("@$me","","$rtweettext"); */ // Remove just the bot's username 
-            $text  = preg_replace('/@(\w+)\s\b/i', "", "$tweet");                  // Or remove all mentions.
+            $text  = str_replace("@$me", "", "$tweet"); // Remove just the bot's username 
+            /* $text  = preg_replace('/@(\w+)\s\b/i', "", "$tweet"); */ // Or remove all mentions.
             $id    = $tweets->id;
             
             curl_operation($text, $id);
