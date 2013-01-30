@@ -1,4 +1,5 @@
 <?php
+    error_reporting(E_ERROR | E_WARNING | E_PARSE); // Turn on error reporting for debugging.
 /**
  *  Release Notes: 
  *
@@ -22,9 +23,6 @@
  *  @author (of minor modifications) Leonard M. Witzel <witzel@post.harvard.edu> 
  */
 
-
-    error_reporting(E_ERROR | E_WARNING | E_PARSE); // Turn on error reporting for debugging.
-
     $db_host = '';  /* Your db host name here, probably 'localhost' */
     $db_user = '';  /* Your database user name here */
     $db_pw   = '';  /* Your password goes here */
@@ -36,7 +34,8 @@
     $access_token        = '';
     $access_token_secret = '';
     
-    $me   = "";  /* Your Twitter Username without the @ symbol */
+    $me = "";      /* Your Twitter Username without the @ symbol */
+    $website = ""; /* Your website root url. */
     
     /* Default response if chatbot fails to find appropriate answer. */
     $fail = array(
@@ -44,15 +43,18 @@
         "I'm sorry. I'm a bit sleepy. What was that again?",
         "Can you rephrase that?",
         "So how about that local sports team?",
-        "When I grow up I want to be a giant robot."
+        "When I grow up I want to be a giant robot.",
+        "Will this be on the test?",
+        "I like turtles.",
+        "fascinating."
     );
 
     /**
      * curl_operation function.
      */
-    function curl_operation($text, $msg_id){
+    function curl_operation($text, $user){
         $text = urlencode($text);
-        $url  = curl_init('http://prontosaur.us/gui/plain/index.php?say='.$text.'&submit=say&convo_id='.$msg_id.'&bot_id=1&format=html');
+        $url  = curl_init('http://'.$website.'/gui/plain/index.php?say='.$text.'&submit=say&convo_id='.$user.'&bot_id=1&format=html');
         curl_setopt($url, CURLOPT_HEADER, 0);
         curl_exec($url);
         curl_close($url);
@@ -96,7 +98,7 @@
         $user = $msg->sender_screen_name;
         $text = $msg->text;
         $msg_id = $msg->id;
-        curl_operation($text, $msg_id);
+        curl_operation($text, $user);
         $grassbrig_reply   = $oauth->post('direct_messages/new',array('screen_name'=>$user,'text'=>make_reply($text)));
         $grassbrig_destory = $oauth->post('direct_messages/destroy/'.$msg_id);
     }
@@ -113,11 +115,11 @@
         
         if($tweets->from_user != $me){
             $tweet = $tweets->text;
-            /* $text  = str_replace("@$me", "", "$tweet"); */ // Remove just the bot's username 
-            $text = preg_replace('/@(\w+)\s\b/i', "", "$tweet"); // Or remove all mentions.
-            $id   = $tweets->id;
+            // $text  = str_replace("@$me", "", "$tweet"); // Remove just the bot's username 
+            $text  = preg_replace('/@(\w+)\s\b/i', "", "$tweet"); // Or remove all mentions.
+            $id    = $tweets->id;
             
-            curl_operation($text, $id);
+            curl_operation($text, $from);
             $bot_reply = make_reply($text);
             
             if(ctype_space($bot_reply) || empty($bot_reply) || $bot_reply == ".")
