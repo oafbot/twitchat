@@ -8,14 +8,14 @@
  *
  *  http://www.rebelwords.org/2012/08/twitterbot-php-and-program-o/
  *
- *  Credit should be given to Robert of www.rebelworlds.com for figuring out 
+ *  Credit should be given to Robert of www.rebelwords.com for figuring out 
  *  the bulk of the steps for this procedure. 
  *
  *  This script just attempts to "fix" some of the issues I ran into when I tried
  *  to apply Robert's script on my chatbot.
  *  
  *  Let me know if you make any useful modifications to this script. 
- *  Robert of www.rebelworlds.com may also apprecaite the source code to any future modifications.
+ *  Robert of www.rebelwords.com may also apprecaite the source code to any future modifications.
  *
  *  @filesource     twitter_chatbot.php
  *  @date           2013-01-25 21:53:22 -0500 (Fri, 25 Jan 2013)
