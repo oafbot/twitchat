@@ -117,6 +117,8 @@
             $tweet = $tweets->text;
             // $text  = str_replace("@$me", "", "$tweet"); // Remove just the bot's username 
             $text  = preg_replace('/@(\w+)\s\b/i', "", "$tweet"); // Or remove all mentions.
+            $text  = preg_replace('@([A-Za-z0-9_]+)', "", "$text");
+            $text  = preg_replace('^[a-zA-Z0-9\-\.]+\.(com|org|net|mil|edu|COM|ORG|NET|MIL|EDU|co|CO)$', "", "$text");
             $id    = $tweets->id;
             
             curl_operation($text, $from);
