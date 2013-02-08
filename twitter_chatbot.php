@@ -64,7 +64,7 @@
      * make_reply function.
      */
     function make_reply($text){
-        $sql   = "SELECT * FROM conversation_log WHERE input LIKE '%".$text."%' ORDER BY id DESC LIMIT 1";
+        $sql   = "SELECT * FROM conversation_log WHERE input LIKE \"%$text%\" ORDER BY id DESC LIMIT 1";
         $rs    = mysql_query($sql) or die (mysql_error());
         $row   = mysql_fetch_array($rs);
         $reply = $row['response'];
