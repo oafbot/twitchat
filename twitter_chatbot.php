@@ -35,7 +35,7 @@
     $access_token_secret = '';
     
     $me = "";      /* Your Twitter Username without the @ symbol */
-    $website = ""; /* Your website root url. */
+    define("WEBSITE", ""); /* Your website root url. */
     
     /* Default response if chatbot fails to find appropriate answer. */
     $fail = array(
@@ -54,7 +54,7 @@
      */
     function curl_operation($text, $user){
         $text = urlencode($text);
-        $url  = curl_init("http://$website/gui/plain/index.php?say=$text&submit=say&convo_id=$user&bot_id=1&format=html");
+        $url  = curl_init("http://".WEBSITE."/gui/plain/index.php?say=$text&submit=say&convo_id=$user&bot_id=1&format=html");
         curl_setopt($url, CURLOPT_HEADER, 0);
         curl_exec($url);
         curl_close($url);
@@ -116,7 +116,7 @@
         if($tweets->from_user != $me){
             $tweet = $tweets->text;
             $exp = "/(?i)\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?гхрсту]))/";
-            // $text  = str_replace("@$me", "", "$tweet"); // Remove just the bot's username 
+            /* $text  = str_replace("@$me", "", "$tweet"); */  // Remove just the bot's username 
             $text = preg_replace('/@(\w+)\s\b/i', "", $tweet); // Or remove all mentions.
             $text = preg_replace($exp, "", $text);
 
@@ -132,7 +132,6 @@
             
             if($bot_reply != NULL && isset($bot_reply))
                 $oauth->post('statuses/update', array('status'=>$reply, 'in_reply_to_status_id' => $id));
-                // $oauth->post('statuses/update', array('status'=>$reply));
         }
     }
     
