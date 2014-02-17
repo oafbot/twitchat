@@ -3,7 +3,7 @@ twitchat
 ========
 ## Purpose
 Php hack to connect the Program-O chatbot to a twitter account.
-This is a quick and dirty modification of the original script found [here.](http://www.rebewords.org/2012/08/twitterbot-php-and-program-o/)
+This is a quick and dirty modification of the original script found [here.](http://www.rebelwords.org/2012/08/twitterbot-php-and-program-o/)
 
 Credit should be given to Robert of [www.rebelwords.com](http://www.rebelwords.com) for figuring out 
 the bulk of the steps for this procedure. Many thanks to Robert.
